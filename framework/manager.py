@@ -1,3 +1,5 @@
+from app import NotFoundPage
+
 class Application:
     def __init__(self, routes, fronts):
         self.routes = routes
