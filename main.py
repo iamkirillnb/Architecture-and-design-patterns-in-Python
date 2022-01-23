@@ -1,6 +1,7 @@
 
 import string
 import app
+import framework
 import io
 
 
@@ -21,4 +22,4 @@ def other_front(request):
 
 
 
-app_object = app.Application(routes, [secret_front, other_front])
+app_object = framework.Application(routes, [secret_front, other_front])
