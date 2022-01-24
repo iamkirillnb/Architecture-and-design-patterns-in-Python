@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users</title>
+</head>
+
+<body>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .ok {
+            color: #FFCC33;
+            text-align: center;
+        }
+        .method {
+            font-size:1.2em;
+            width:100px;
+            display:inline-block;
+            margin:5px 0 10px 7px;
+        }
+        .list_of_users {
+            font-size:1.1em;
+            margin:5px 0 10px 7px;
+        }
+        ol li { margin : 3px 0 3px 15px; list-style-type:none;font-size:1em;}
+    </style>
+    <h1 class="ok">Users page!</h1>
+    <p><span class='method'>GET:</span>(get all users)</p>
+    <p><span class='method'>POST:</span>(create user ?user=name)</p>
+    <p class="list_of_users">Все пользователи:</p>
+    <ol class="list_of_users">
+    {% for user in users[0] %}
+    
+        <li>{{user.name}}</li>
+    
+    {% endfor %}
+    </ol>
+</body>
+
+</html>
