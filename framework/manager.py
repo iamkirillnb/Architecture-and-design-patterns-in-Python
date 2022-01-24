@@ -21,12 +21,6 @@ def get(environ, routes, fronts, data):
     answer, body = controller(request, data)
     return answer, body
 
-def post(environ, routes, fronts, data):
-    pprint(environ)
-    answer, body = "200", "post method"
-    return answer, b'post method'
-
-
 
 
 def parse_input_data(data: str):
@@ -82,7 +76,7 @@ class Application:
 
         if method == "GET":
             answer, body = get(environ, self.routes, self.fronts, self.data)
-            
+
         if method == "POST":
             if environ['PATH_INFO'] == "/contact":
                 result, answer, body = post(environ)
