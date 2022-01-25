@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ok</title>
+</head>
+
+<body>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .ok {
+            color: #FFCC33;
+            text-align: center;
+        }
+        form {
+            width:350px;
+            margin:50px auto 0;
+        }
+        form input {
+            width:100%;
+            margin-top:7px;
+        }
+        form textarea {
+            box-sizing:border-box;
+            width:350px;
+            margin-top:7px;
+            padding:1px 3px;
+        }
+    </style>
+    <h1 class="ok">Contact page!</h1>
+    <form method='post'>
+        <input type="text" name="subject" required placeholder='subject'>
+        <textarea name="comment" cols="40" rows="3" placeholder='text'></textarea>
+        <input type="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" size="30" required placeholder='email'><br/>
+        <input type="submit" value="Отправить">
+    </form>
+</body>
+
+</html>
