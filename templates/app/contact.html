@@ -1,46 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact</title>
-</head>
-
-<body>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-        }
-        
-        .ok {
-            color: #FFCC33;
-            text-align: center;
-        }
-        form {
-            width:350px;
-            margin:50px auto 0;
-        }
-        form input {
-            width:100%;
-            margin-top:7px;
-        }
-        form textarea {
-            box-sizing:border-box;
-            width:350px;
-            margin-top:7px;
-            padding:1px 3px;
-        }
-    </style>
-    <h1 class="ok">Contact page!</h1>
+{% extends 'base.html' %}
+{% block title %}Main page{% endblock title %}
+{% block style %}
+<style>
+    * {
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+    }
+    form {
+        margin-top:30px;
+    }
+    form * {
+        width: 100%;
+        margin: 4px 0;
+        padding: 2px 3px;
+        border: 1px solid #336666;
+    }
+    input[type=submit] {
+        border: 1px solid #33CC00;
+        background: #66CC66;
+        padding: 4px 7px;
+        color:white;
+    }
+</style>
+{% endblock style %}
+{% block content %}
+<h1>Contact page!</h1>
     <form method='post'>
         <input type="text" name="subject" required placeholder='subject'>
         <textarea name="comment" cols="40" rows="3" placeholder='text'></textarea>
         <input type="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" size="30" required placeholder='email'><br/>
         <input type="submit" value="Отправить">
     </form>
-</body>
-
-</html>
+{% endblock content %}

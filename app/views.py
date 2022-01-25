@@ -33,16 +33,16 @@ def parse_wsgi_input_data(data: bytes) -> dict:
 
 
 def index_page(request, *args):
-    output = app.render(template_name="./templates/app/index.html", kwargs={"name": "user"})
+    output = app.render(template_name="app/index.html", kwargs={"name": "user"})
     return '200 OK', output.encode('utf-8')
 
 def users_page(request, dict):
-    output = app.render(template_name="./templates/app/users.html", users=dict)  
+    output = app.render(template_name="app/users.html", users=dict)  
     return '200 OK', output.encode('utf-8')
 
 
 def about_page(request, *args):
-    output = app.render(template_name="./templates/app/about.html")
+    output = app.render(template_name="app/about.html")
     return '200 OK', output.encode('utf-8')
 
 
@@ -51,11 +51,11 @@ def contact_page(request, *args):
         body = get_wsgi_input_data(request['env'])
         result = parse_wsgi_input_data(body)
         print(result)
-    output = app.render(template_name="./templates/app/contact.html")
+    output = app.render(template_name="app/contact.html")
     return '200 OK', output.encode('utf-8')
 
 
 class NotFoundPage:
     def __call__(self, request, *args):
-        output = app.render(template_name="./templates/app/error.html")
+        output = app.render(template_name="app/error.html")
         return '200 OK', output.encode('utf-8')
