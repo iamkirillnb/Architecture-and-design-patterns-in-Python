@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from re import S
 from pprint import pprint
+from urllib import request
 from markupsafe import re
 from .render import render as renderTemp
 
@@ -43,33 +44,41 @@ class NotFoundPage:
         output = renderTemp(template_name="error.html")
         return '200 OK', output.encode('utf-8')
 
+
+
 class Application:
-    def __init__(self, routes, fronts, data):
+    def __init__(self, routes, fronts, courses, categories):
         self.routes = routes
         self.fronts = fronts
-        self.data = data
+        self.courses = courses
+        self.categories = categories
 
         self.comments = []
 
     def __call__(self, environ, start_response):
-        method = environ['REQUEST_METHOD']
+
         path = environ['PATH_INFO']
-        query = environ['QUERY_STRING']
-        request = {}
-        request['method'] = method
-        request['path'] = path
-        request['query'] = query
-        request['env'] = environ
+        # if path.startswith('/courses/') and not path.endswith('create_course'):
+        #     regx = '/\w+/(\w+)'
+        #     course_name = re.search(regx, path)
+        #     controller = self.routes['/courses/course_name']
+        #     answer, body = controller(environ,course_name.group(1))
+        #     start_response(answer, [('Content-Type', 'text/html')])
+        #     return [body]
+        environ['courses'] = self.courses
+        environ['categories'] = self.categories
+
         if path in self.routes:
             controller = self.routes[path]
         else:
             controller = NotFoundPage()
         for front in self.fronts:
-            front(request)
-        if query:
-            data = parse_input_data(query)
-            for k,v in data.items():
-                self.data.append({k:v})
-        answer, body = controller(request, self.data)
+            front(environ)
+        answer, body = controller(environ)
         start_response(answer, [('Content-Type', 'text/html')])
         return [body]
+
+    def write_to_data(self, item):
+        self.data['name'] = item
+        return self.data
+    

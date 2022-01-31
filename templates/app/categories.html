@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block title %}Categories{% endblock title %}
+{% block style %}
+<style>
+    span {
+        margin:3px 0;
+        font-size:1.1em;
+        width:100px;
+        display:inline-block;
+    }
+    
+    ul {
+        list-style-type:none;
+    }
+    ul li.course_name {
+        padding: 5px 3px;
+        box-sizing:border-box;
+    }
+    ul li.course_name:nth-child(even) {
+        background: #6699CC;
+    }
+    ul li.course_name {
+        background: #336699;
+    }
+    .courses {
+        margin-top:17px;
+        box-sizing: border-box;
+        width:100%;
+        color: white;
+        position:relative;
+    }
+    .courses a {
+        color: white;
+        text-decoration:none;
+    }
+    .plus:before {
+        content: '\002B';
+        color:#66CC66;
+    }
+    a.plus {
+        color:#66CC66;
+        position:absolute;
+        right:0;
+    }
+</style>
+{% endblock style %}
+{% block content %}
+<h1>Our categories</h1>
+<div class="courses">
+<ul>
+    {% for categorie in categories %}
+
+        <li class="course_name">&#62;&nbsp;{{categorie.categorie_name}}</li>
+
+    {% endfor %}
+</ul>
+<a class="plus" href='/categories/create_category'>add category</a>
+</div>
+{% endblock content %}

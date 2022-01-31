@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block title %}Course {{courses.course_name}}{% endblock title %}
+{% block style %}
+<style>
+    h1 {
+        color:black;
+    }
+    form {
+        width: 100%;
+        text-align:center;
+    }
+    form fieldset {
+        padding:17px 8px;
+        box-sizing:border-box;
+    }
+    form legend {
+        text-align:left;
+        margin-left:20px;
+        padding:0 5px;
+    }
+    .text {
+        padding:3px 2px;
+        box-sizing:border-box;
+        width: 300px;
+    }
+    .btn {
+        background: #669966;
+        color:white;
+        border:1px solid #003300;
+        padding:3px 5px;
+        box-sizing:border-box;
+
+    }
+</style>
+{% endblock style %}
+{% block content %}
+<h1>Creator</h1>
+<form method="POST">
+    <fieldset>
+        <legend>create new category</legend>
+        <input class="text" name="categorie_name" type='text' placeholder='category name'>
+        <input class="btn "type="submit" value="create">
+    </fieldset>
+</form>
+{% endblock content %}
