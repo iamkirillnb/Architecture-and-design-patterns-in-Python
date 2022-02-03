@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}Course {{courses.course_name}}{% endblock title %}
+{% block title %}Course {{kwargs.courses.course_name}}{% endblock title %}
 {% block style %}
 <style>
     h1 {
@@ -31,6 +31,12 @@
         box-sizing:border-box;
 
     }
+    select {
+
+        padding:3px 5px;
+        box-sizing:border-box;
+
+    }
 </style>
 {% endblock style %}
 {% block content %}
@@ -39,6 +45,11 @@
     <fieldset>
         <legend>create new course</legend>
         <input class="text" name="course_name" type='text' placeholder='course name'>
+        <select>
+            {% for category in kwargs.categories %}
+            <option class="opt">{{category.categorie_name}}</option>
+            {% endfor %}
+        </select>
         <input class="btn "type="submit" value="create">
     </fieldset>
 </form>

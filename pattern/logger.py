@@ -16,7 +16,9 @@ class Logger(metaclass=Singleton):
         self.logger = logger
     
     def __call__(self, *args, **kwds):
-        print(f'[{datetime.datetime.now()}] [INFO] [{traceback.extract_stack(None, 2)[0][2]}]')
+        info = f'[{datetime.datetime.now()}] [INFO] [{traceback.extract_stack(None, 2)[0][2]}]\n'
+        with open('logger.txt', 'a') as log:
+            log.write(info)
 
 
 log = Logger(logger=logger)

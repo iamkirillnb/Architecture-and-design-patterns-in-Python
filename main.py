@@ -5,7 +5,6 @@ import framework
 import io
 
 
-
 routes = {
     "/": app.index_page,
     '/categories': app.categories_page,
@@ -19,15 +18,14 @@ routes = {
 }
 
 categories = [
-    {"categorie_name": "Generative"},
-    {"categorie_name": "Structural"},
-    {"categorie_name": "Behavioral"},
+    {"categorie_name": "Interpreted"},
+    {"categorie_name": "Сompiled"},
 ]
 
 courses = [
-    {"course_name": "Python"},
-    {"course_name": "Golang"},
-    {"course_name": "Java Script"},
+    {"categorie_name": "Interpreted", "course_name": "Python"},
+    {"categorie_name": "Сompiled", "course_name": "Golang"},
+    {"categorie_name": "Interpreted", "course_name": "Java Script"},
 ]
 
 def secret_front(request):
@@ -36,8 +34,6 @@ def secret_front(request):
     
 def other_front(request):
     request['key'] = 'value'
-
-
 
 
 app_object = framework.Application(routes, [secret_front, other_front], courses, categories)

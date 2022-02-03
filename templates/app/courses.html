@@ -42,6 +42,10 @@
         position:absolute;
         right:0;
     }
+    small {
+
+        float:right;
+    }
 </style>
 {% endblock style %}
 {% block content %}
@@ -50,7 +54,7 @@
 <ul>
     {% for course in courses %}
 
-        <li class="course_name">&#62;&nbsp;{{course.course_name}}</li>
+        <li class="course_name">&#62;&nbsp;{{course.course_name}}&nbsp;&nbsp;<small>{{course.categorie_name}}</small></li>
 
     {% endfor %}
 </ul>

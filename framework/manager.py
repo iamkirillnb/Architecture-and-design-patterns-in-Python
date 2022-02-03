@@ -1,13 +1,26 @@
 from dataclasses import dataclass
 from re import S
 from pprint import pprint
+
+
 from urllib import request
 from markupsafe import re
+
+
 from .render import render as renderTemp
 
 
 
+def add(argument):
+    def decorator(function):
+        def wrapper(req):
+            req['PATH_INFO'] = argument
 
+            result = function(req)
+
+            return result
+        return wrapper
+    return decorator
 
 def parse_input_data(data: str):
     result = {}
