@@ -1,4 +1,4 @@
-from asyncio.log import logger
+import logging
 import datetime
 import traceback
 
@@ -11,14 +11,22 @@ class Singleton(type):
         return cls._instances[cls]
 
 
-class Logger(metaclass=Singleton):
-    def __init__(self, logger) -> None:
-        self.logger = logger
-    
-    def __call__(self, *args, **kwds):
-        info = f'[{datetime.datetime.now()}] [INFO] [{traceback.extract_stack(None, 2)[0][2]}]\n'
-        with open('logger.txt', 'a') as log:
-            log.write(info)
+class Logger():
+    def __init__(self, name) -> None:
+        self.name = name
+        self.logger = logging.getLogger(name)
+        self.logger.setLevel(logging.DEBUG)
+        logger_handler = logging.FileHandler(f'{self.name}.log')
 
+        logger_handler.setLevel(logging.DEBUG)
 
-log = Logger(logger=logger)
+        strfmt = '[%(asctime)s] [%(name)s] [%(levelname)s] > %(message)s'
+
+        datefmt = '%Y-%m-%d %H:%M:%S'
+
+        formatter = logging.Formatter(fmt=strfmt, datefmt=datefmt)
+        logger_handler.setFormatter(formatter)
+        self.logger.addHandler(logger_handler)
+
+    def __call__(self, *args, **kwargs):
+        self.logger.debug(args)

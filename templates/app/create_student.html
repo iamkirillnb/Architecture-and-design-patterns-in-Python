@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}Category{% endblock title %}
+{% block title %}Student creator{% endblock title %}
 {% block style %}
 <style>
     h1 {
@@ -34,11 +34,11 @@
 </style>
 {% endblock style %}
 {% block content %}
-<h1>Creator</h1>
+<h1>Student creator</h1>
 <form method="POST">
     <fieldset>
-        <legend>create new category</legend>
-        <input class="text" name="categorie_name" type='text' placeholder='category name'>
+        <legend>create new student</legend>
+        <input class="text" name="student_name" type='text' placeholder='student name'>
         <input class="btn "type="submit" value="create">
     </fieldset>
 </form>

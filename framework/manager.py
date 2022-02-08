@@ -1,14 +1,12 @@
+import json
 from dataclasses import dataclass
 from re import S
 from pprint import pprint
 
-
 from urllib import request
 from markupsafe import re
 
-
 from .render import render as renderTemp
-
 
 
 def add(argument):
@@ -19,8 +17,11 @@ def add(argument):
             result = function(req)
 
             return result
+
         return wrapper
+
     return decorator
+
 
 def parse_input_data(data: str):
     result = {}
@@ -33,24 +34,27 @@ def parse_input_data(data: str):
             result[k] = v
     return result
 
+
 def get_wsgi_input_data(env) -> bytes:
-       # получаем длину тела
-   content_length_data = env.get('CONTENT_LENGTH')
-   # приводим к int
-   content_length = int(content_length_data) if content_length_data else 0
-   # считываем данные, если они есть
-   data = env['wsgi.input'].read(content_length) if content_length > 0 else b''
-   return data
+    # получаем длину тела
+    content_length_data = env.get('CONTENT_LENGTH')
+    # приводим к int
+    content_length = int(content_length_data) if content_length_data else 0
+    # считываем данные, если они есть
+
+    data = env['wsgi.input'].read(content_length) if content_length > 0 else b''
+    return data
 
 
 def parse_wsgi_input_data(data: bytes) -> dict:
-   result = {}
-   if data:
-       # декодируем данные
-       data_str = data.decode(encoding='utf-8')
-       # собираем их в словарь
-       result = parse_input_data(data_str)
-   return result
+    result = {}
+    if data:
+        # декодируем данные
+        data_str = data.decode(encoding='utf-8')
+        # собираем их в словарь
+        result = parse_input_data(data_str)
+    return result
+
 
 class NotFoundPage:
     def __call__(self, request, *args):
@@ -58,28 +62,16 @@ class NotFoundPage:
         return '200 OK', output.encode('utf-8')
 
 
-
 class Application:
-    def __init__(self, routes, fronts, courses, categories):
+    def __init__(self, routes, fronts):
         self.routes = routes
         self.fronts = fronts
-        self.courses = courses
-        self.categories = categories
 
         self.comments = []
 
     def __call__(self, environ, start_response):
 
         path = environ['PATH_INFO']
-        # if path.startswith('/courses/') and not path.endswith('create_course'):
-        #     regx = '/\w+/(\w+)'
-        #     course_name = re.search(regx, path)
-        #     controller = self.routes['/courses/course_name']
-        #     answer, body = controller(environ,course_name.group(1))
-        #     start_response(answer, [('Content-Type', 'text/html')])
-        #     return [body]
-        environ['courses'] = self.courses
-        environ['categories'] = self.categories
 
         if path in self.routes:
             controller = self.routes[path]
@@ -91,7 +83,20 @@ class Application:
         start_response(answer, [('Content-Type', 'text/html')])
         return [body]
 
-    def write_to_data(self, item):
-        self.data['name'] = item
-        return self.data
-    
+
+def write_to_file(key, data):
+    with open("data.json", "r", encoding="UTF-8") as file:
+        data_bd = json.loads(file.read())
+        data_bd[key].append(data)
+    with open("data.json", "w", encoding="UTF-8") as file:
+        json.dump(data_bd, file, indent=2, ensure_ascii=False)
+    return
+
+
+def read_from_file(name):
+    response = []
+    with open("data.json", "r", encoding="UTF-8") as file:
+        data = json.loads(file.read())
+        for d in data[name]:
+            response.append(d)
+    return response

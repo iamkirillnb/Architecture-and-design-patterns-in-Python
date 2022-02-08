@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}Courses{% endblock title %}
+{% block title %}Students{% endblock title %}
 {% block style %}
 <style>
     span {
@@ -12,15 +12,16 @@
     ul {
         list-style-type:none;
     }
-    ul li.course_name {
+    ul li.student_name {
         padding: 5px 3px;
         box-sizing:border-box;
     }
-    ul li.course_name:nth-child(even) {
+    ul li.student_name:nth-child(even) {
         background: #6699CC;
     }
-    ul li.course_name {
+    ul li.student_name {
         background: #336699;
+        color:black;
     }
     .courses {
         margin-top:17px;
@@ -29,10 +30,7 @@
         color: white;
         position:relative;
     }
-    .courses a {
-        color: white;
-        text-decoration:none;
-    }
+
     .plus:before {
         content: '\002B';
         color:#66CC66;
@@ -42,22 +40,18 @@
         position:absolute;
         right:0;
     }
-    small {
-
-        float:right;
-    }
 </style>
 {% endblock style %}
 {% block content %}
-<h1>Our courses</h1>
+<h1>Our students</h1>
 <div class="courses">
 <ul>
-    {% for course in courses %}
+    {% for student in students %}
 
-        <li class="course_name">&#62;&nbsp;{{course}}&nbsp;&nbsp;<small>{{course}}</small></li>
+        <li class="student_name">&#62;&nbsp;{{student}}</li>
 
     {% endfor %}
 </ul>
-<a class="plus" href='/courses/create_course'>add course</a>
+<a class="plus" href='/students/create_student'>add student</a>
 </div>
 {% endblock content %}

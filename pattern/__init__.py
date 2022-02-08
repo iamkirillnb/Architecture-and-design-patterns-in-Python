@@ -1,2 +1,2 @@
-from .logger import log
+from .logger import Logger
 from .decorator import debug

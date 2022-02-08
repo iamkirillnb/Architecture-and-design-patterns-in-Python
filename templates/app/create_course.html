@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}Course {{kwargs.courses.course_name}}{% endblock title %}
+{% block title %}Course{% endblock title %}
 {% block style %}
 <style>
     h1 {
@@ -47,7 +47,7 @@
         <input class="text" name="course_name" type='text' placeholder='course name'>
         <select>
             {% for category in kwargs.categories %}
-            <option class="opt">{{category.categorie_name}}</option>
+            <option id="category_name" class="opt">{{category}}</option>
             {% endfor %}
         </select>
         <input class="btn "type="submit" value="create">
