@@ -1,5 +1,9 @@
 {
-  "students": [],
-  "categories": [],
+  "students": [
+    "nick",
+    "Kenny"
+  ],
+  "categories": [
+  ],
   "courses": []
 }

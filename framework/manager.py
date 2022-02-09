@@ -72,11 +72,11 @@ class Application:
     def __call__(self, environ, start_response):
 
         path = environ['PATH_INFO']
-
-        if path in self.routes:
-            controller = self.routes[path]
-        else:
-            controller = NotFoundPage()
+        for k, v in self.routes.items():
+            if path in v:
+                controller = v[path]
+            else:
+                controller = NotFoundPage()
         for front in self.fronts:
             front(environ)
         answer, body = controller(environ)
