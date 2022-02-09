@@ -45,9 +45,9 @@
     <fieldset>
         <legend>create new course</legend>
         <input class="text" name="course_name" type='text' placeholder='course name'>
-        <select>
+        <select name="category_name">
             {% for category in kwargs.categories %}
-            <option id="category_name" class="opt">{{category}}</option>
+            <option id="category_name" class="opt">{{category.category}}</option>
             {% endfor %}
         </select>
         <input class="btn "type="submit" value="create">

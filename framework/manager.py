@@ -72,6 +72,16 @@ class Application:
     def __call__(self, environ, start_response):
 
         path = environ['PATH_INFO']
+        if environ['REQUEST_METHOD'] == 'GET':
+            if environ['QUERY_STRING']:
+                # environ['get'] = {}
+                data = parse_input_data(environ['QUERY_STRING'])
+                for k, v in data.items():
+                    environ['get'] = {k: v}
+        if environ['REQUEST_METHOD'] == 'POST':
+            body = get_wsgi_input_data(environ)
+            result = parse_wsgi_input_data(body)
+            environ['post'] = result
         for k, v in self.routes.items():
             if path in v:
                 controller = v[path]

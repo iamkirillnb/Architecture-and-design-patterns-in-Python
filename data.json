@@ -1,9 +1,38 @@
 {
   "students": [
-    "nick",
-    "Kenny"
+    {
+      "name": "nick",
+      "courses": null
+    },
+    {
+      "name": "Kenny",
+      "courses": null
+    },
+    {
+      "name": "nick",
+      "courses": null
+    },
+    {
+      "name": "nick",
+      "courses": "12"
+    }
   ],
   "categories": [
+    {
+      "category": "category1"
+    },
+    {
+      "category": "category2"
+    }
   ],
-  "courses": []
+  "courses": [
+    {
+      "course": "12",
+      "category": "category1"
+    },
+    {
+      "course": "new",
+      "category": "category2"
+    }
+  ]
 }

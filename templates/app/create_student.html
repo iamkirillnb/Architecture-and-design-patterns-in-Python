@@ -39,7 +39,13 @@
     <fieldset>
         <legend>create new student</legend>
         <input class="text" name="student_name" type='text' placeholder='student name'>
+        <select name="course_name">
+            {% for course in kwargs.courses %}
+            <option class="opt">{{course.course}}</option>
+            {% endfor %}
+        </select>
         <input class="btn "type="submit" value="create">
     </fieldset>
 </form>
 {% endblock content %}
+
