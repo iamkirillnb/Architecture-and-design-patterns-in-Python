@@ -18,15 +18,8 @@ def index_page(request):
 @debug
 def categories_page(request):
     log.debug("categories_page")
-    categories = framework.read_from_file("categories")
+    categories = Categories.all()
     output = framework.render(template_name="app/categories.html", categories=categories)
-    return '200 OK', output.encode('utf-8')
-
-
-@debug
-def category_page(request):
-    log.debug("category_page")
-    output = framework.render(template_name="app/category.html", categories=request['categories'])
     return '200 OK', output.encode('utf-8')
 
 
@@ -44,38 +37,29 @@ def create_category_page(request):
 @debug
 def courses_page(request):
     log.debug("courses_page")
-    courses = framework.read_from_file("courses")
+    courses = Courses.all()
     output = framework.render(template_name="app/courses.html", courses=courses)
     return '200 OK', output.encode('utf-8')
 
-
-@debug
-def course_page(request):
-    log.debug("course_page")
-    courses = framework.read_from_file("courses")
-    categories = framework.read_from_file("categories")
-    output = framework.render(template_name="app/course.html", kwargs={'courses': courses, 'categories': categories})
-    return '200 OK', output.encode('utf-8')
 
 
 @debug
 def create_course_page(request):
     log.debug("create_course_page")
-    courses = framework.read_from_file("courses")
-    categories = framework.read_from_file("categories")
+    categories = Categories.all()
     if request['REQUEST_METHOD'] == 'POST':
         if request['post'] != '':
             course = Courses(request['post']["course_name"], request['post']["category_name"])
             course.write_course()
     output = framework.render(template_name="app/create_course.html",
-                              kwargs={'courses': courses, 'categories': categories})
+                              kwargs={'categories': categories})
     return '200 OK', output.encode('utf-8')
 
 
 @debug
 def student_page(request):
     log.debug("student_page")
-    students = framework.read_from_file("students")
+    students = Student.all()
     output = framework.render(template_name="app/students.html", students=students)
     return '200 OK', output.encode('utf-8')
 
@@ -83,10 +67,10 @@ def student_page(request):
 @debug
 def create_student_page(request):
     log.debug("create_student_page")
-    courses = framework.read_from_file("courses")
+    courses = Courses.all()
     if request['REQUEST_METHOD'] == 'POST':
         if request['post'] != '':
-            student = Student(request['post']["student_name"], request['post']["course_name"])
+            student = Student(request['post']["student_name"], request['post']["phone_number"], request['post']["course_name"])
             student.write_student()
     output = framework.render(template_name="app/create_student.html", kwargs={'courses': courses})
     return '200 OK', output.encode('utf-8')

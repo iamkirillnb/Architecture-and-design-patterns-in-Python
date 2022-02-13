@@ -46,6 +46,7 @@
         <legend>create new course</legend>
         <input class="text" name="course_name" type='text' placeholder='course name'>
         <select name="category_name">
+            <option value="" selected disabled hidden>Choose here</option>
             {% for category in kwargs.categories %}
             <option id="category_name" class="opt">{{category.category}}</option>
             {% endfor %}

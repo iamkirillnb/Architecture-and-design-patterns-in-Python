@@ -48,9 +48,9 @@
 <ul>
     {% for student in students %}
 
-        <li class="student_name">&#62;&nbsp;{{student.name}}</li>
+        <li class="student_name">&#62;&nbsp;{{student.name}}&#9;{{student.phone}}</li>
 
-    {% endfor %}
+    {% endfor %}s
 </ul>
 <a class="plus" href='/app/students/create_student'>add student</a>
 </div>

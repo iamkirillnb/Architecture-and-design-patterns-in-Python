@@ -1,20 +1,27 @@
-from abc import abstractmethod
+import sqlite3
+import abc
 from framework import write_to_file, read_from_file
+import pattern
+# from pattern import DomainObject
+
+
+connection = sqlite3.connect('project.sqlite')
 
 
 class Student:
-    def __init__(self, name, course=None):
+    def __init__(self, name=None, phone=None, course=None):
         self.name = name
+        self.phone = phone
         self.course = course
 
     def write_student(self):
-        write_to_file('students', {'name': self.name, 'courses': self.course})
-        return
+        person_mapper = pattern.SqliteStudentMapper(connection)
+        person_mapper.insert(self.name, self.phone, self.course)
 
     @staticmethod
     def all():
-        data = read_from_file('students')
-        return data
+        person_mapper = pattern.SqliteStudentMapper(connection)
+        return person_mapper.get_all()
 
 
 class Categories:
@@ -22,13 +29,14 @@ class Categories:
         self.category = category
 
     def write_category(self):
-        write_to_file('categories', {'category': self.category})
-        return
+        category_mapper = pattern.SqliteCategoryMapper(connection)
+        category_mapper.insert(self.category)
 
     @staticmethod
     def all():
-        data = read_from_file('categories')
-        return data
+        category_mapper = pattern.SqliteCategoryMapper(connection)
+        return category_mapper.get_all()
+
 
 class Courses:
     def __init__(self, course, category=None):
@@ -36,10 +44,10 @@ class Courses:
         self.category = category
 
     def write_course(self):
-        write_to_file('courses', {'course': self.course, 'category': self.category})
-        return
+        course_mapper = pattern.SqliteCourseMapper(connection)
+        course_mapper.insert(self.course, self.category)
 
     @staticmethod
     def all():
-        data = read_from_file('courses')
-        return data
+        course_mapper = pattern.SqliteCourseMapper(connection)
+        return course_mapper.get_all()

@@ -29,6 +29,11 @@
         border:1px solid #003300;
         padding:3px 5px;
         box-sizing:border-box;
+    }
+    select {
+
+        padding:3px 5px;
+        box-sizing:border-box;
 
     }
 </style>
@@ -39,9 +44,11 @@
     <fieldset>
         <legend>create new student</legend>
         <input class="text" name="student_name" type='text' placeholder='student name'>
+        <input class="text" name="phone_number" type='text' placeholder='+71234567890'>
         <select name="course_name">
+            <option value="" selected disabled hidden>Choose here</option>
             {% for course in kwargs.courses %}
-            <option class="opt">{{course.course}}</option>
+            <option>{{course.course}}</option>
             {% endfor %}
         </select>
         <input class="btn "type="submit" value="create">
