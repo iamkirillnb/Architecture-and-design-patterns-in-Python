@@ -9,20 +9,6 @@ from markupsafe import re
 from .render import render as renderTemp
 
 
-def add(argument):
-    def decorator(function):
-        def wrapper(req):
-            req['PATH_INFO'] = argument
-
-            result = function(req)
-
-            return result
-
-        return wrapper
-
-    return decorator
-
-
 def parse_input_data(data: str):
     result = {}
     if data:
@@ -70,7 +56,7 @@ class Application:
         self.comments = []
 
     def __call__(self, environ, start_response):
-
+        controller = ''
         path = environ['PATH_INFO']
         if environ['REQUEST_METHOD'] == 'GET':
             if environ['QUERY_STRING']:
@@ -92,21 +78,3 @@ class Application:
         answer, body = controller(environ)
         start_response(answer, [('Content-Type', 'text/html')])
         return [body]
-
-
-def write_to_file(key, data):
-    with open("data.json", "r", encoding="UTF-8") as file:
-        data_bd = json.loads(file.read())
-        data_bd[key].append(data)
-    with open("data.json", "w", encoding="UTF-8") as file:
-        json.dump(data_bd, file, indent=2, ensure_ascii=False)
-    return
-
-
-def read_from_file(name):
-    response = []
-    with open("data.json", "r", encoding="UTF-8") as file:
-        data = json.loads(file.read())
-        for d in data[name]:
-            response.append(d)
-    return response

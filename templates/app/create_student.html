@@ -46,7 +46,7 @@
         <input class="text" name="student_name" type='text' placeholder='student name'>
         <input class="text" name="phone_number" type='text' placeholder='+71234567890'>
         <select name="course_name">
-            <option value="" selected disabled hidden>Choose here</option>
+            <option value="" selected disabled hidden>course</option>
             {% for course in kwargs.courses %}
             <option>{{course.course}}</option>
             {% endfor %}

@@ -1,6 +1,5 @@
 import sqlite3
 import abc
-from framework import write_to_file, read_from_file
 import pattern
 # from pattern import DomainObject
 

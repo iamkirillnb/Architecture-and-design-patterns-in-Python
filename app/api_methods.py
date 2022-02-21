@@ -8,7 +8,6 @@ def api_students(request):
     return '200 OK', json.dumps(students, indent=2).encode('utf-8')
 
 
-
 def api_courses(request):
     courses = Courses.all()
     return '200 OK', json.dumps(courses, indent=4).encode("UTF-8")
