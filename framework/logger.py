@@ -14,24 +14,22 @@ class Logger(metaclass=MetaSingleton):
             file.write(f'{message}\n')
 
     def debug(self, message):
-        msg = f'[{datetime.datetime.now()}] - DEBUG - [logger name >> {self.name}] - [{message}]'
-        self.write_log(self.name, msg)
+        self.make_logger_message('debug', self.name, message)
 
     def info(self, message):
-        msg = f'[{datetime.datetime.now()}] - INFO - [logger name >> {self.name}] - [{message}]'
-        self.write_log(self.name, msg)
+        self.make_logger_message('info', self.name, message)
 
     def warning(self, message):
-        msg = f'[{datetime.datetime.now()}] - WARNING - [logger name >> {self.name}] - [{message}]'
-        self.write_log(self.name, msg)
+        self.make_logger_message('warning', self.name, message)
 
     def error(self, message):
-        msg = f'[{datetime.datetime.now()}] - ERROR - [logger name >> {self.name}] - [{message}]'
-        self.write_log(self.name, msg)
+        self.make_logger_message('error', self.name, message)
 
     def critical(self, message):
-        msg = f'[{datetime.datetime.now()}] - CRITICAL - [logger name >> {self.name}] - [{message}]'
-        self.write_log(self.name, msg)
+        self.make_logger_message('critical', self.name, message)
         sys.exit([0])
 
 
+    def make_logger_message(self, level, name, message):
+        msg = f'[{datetime.datetime.now()}] - {level} - [logger name >> {name}] - [{message}]'
+        self.write_log(name, msg)

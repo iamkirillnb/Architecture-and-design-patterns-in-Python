@@ -4,16 +4,16 @@ from .models import Student, Courses, Categories
 
 
 def api_students(request):
-    students = Student.all()
-    return '200 OK', json.dumps(students, indent=2).encode('utf-8')
+    students = Student.json()
+    return '200 OK', students
 
 
 def api_courses(request):
-    courses = Courses.all()
-    return '200 OK', json.dumps(courses, indent=4).encode("UTF-8")
+    courses = Courses.json()
+    return '200 OK', courses
 
 
 def api_categories(request):
-    categories = Categories.all()
-    return '200 OK', json.dumps(categories, indent=4).encode("UTF-8")
+    categories = Categories.json()
+    return '200 OK', categories
 

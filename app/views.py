@@ -27,9 +27,11 @@ def categories_page(request):
 def create_category_page(request):
     log.debug("create_category_page")
     if request['REQUEST_METHOD'] == 'POST':
-        if request['post'] != '':
+        if request['post']["categorie_name"] != '':
             category = Categories(request['post']["categorie_name"])
             category.write_category()
+        else:
+            return '400', b'not valid data'
     output = framework.render(template_name="app/create_category.html", kwargs={})
     return '200 OK', output.encode('utf-8')
 
@@ -48,9 +50,11 @@ def create_course_page(request):
     log.debug("create_course_page")
     categories = Categories.all()
     if request['REQUEST_METHOD'] == 'POST':
-        if request['post'] != '':
+        if request['post']["course_name"] != '':
             course = Courses(request['post']["course_name"], request['post']["category_name"])
             course.write_course()
+        else:
+            return '400', b'not valid data'
     output = framework.render(template_name="app/create_course.html",
                               kwargs={'categories': categories})
     return '200 OK', output.encode('utf-8')
@@ -69,9 +73,11 @@ def create_student_page(request):
     log.debug("create_student_page")
     courses = Courses.all()
     if request['REQUEST_METHOD'] == 'POST':
-        if request['post'] != '':
+        if request['post']["student_name"] != '' or request['post']["phone_number"] != '':
             student = Student(request['post']["student_name"], request['post']["phone_number"], request['post']["course_name"])
             student.write_student()
+        else:
+            return '400', b'not valid data'
     output = framework.render(template_name="app/create_student.html", kwargs={'courses': courses})
     return '200 OK', output.encode('utf-8')
 

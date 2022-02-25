@@ -1,6 +1,7 @@
 import sqlite3
 import abc
 import pattern
+
 # from pattern import DomainObject
 
 
@@ -22,6 +23,11 @@ class Student:
         person_mapper = pattern.SqliteStudentMapper(connection)
         return person_mapper.get_all()
 
+    @staticmethod
+    def json():
+        person_mapper = pattern.SqliteStudentMapper(connection)
+        return person_mapper.get_json()
+
 
 class Categories:
     def __init__(self, category):
@@ -36,6 +42,10 @@ class Categories:
         category_mapper = pattern.SqliteCategoryMapper(connection)
         return category_mapper.get_all()
 
+    @staticmethod
+    def json():
+        person_mapper = pattern.SqliteCategoryMapper(connection)
+        return person_mapper.get_json()
 
 class Courses:
     def __init__(self, course, category=None):
@@ -50,3 +60,8 @@ class Courses:
     def all():
         course_mapper = pattern.SqliteCourseMapper(connection)
         return course_mapper.get_all()
+
+    @staticmethod
+    def json():
+        person_mapper = pattern.SqliteCourseMapper(connection)
+        return person_mapper.get_json()
